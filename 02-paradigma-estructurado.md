@@ -1,0 +1,6 @@
+# El Paradigma Estructurado
+
+
+
+
+
