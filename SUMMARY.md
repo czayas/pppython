@@ -1,4 +1,4 @@
-# Summary
+# Índice
 
 * [Léame primero](README.md)
 * [Introducción](00-introduccion.md)
@@ -9,4 +9,6 @@
 * [Paradigma Funcional](05-paradigma-funcional.md)
 * [Paradigma Lógico](06-paradigma-logico.md)
 * [El lenguaje Python](a1-python.md)
+
+
 
