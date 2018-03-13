@@ -2,7 +2,7 @@
 
 ## ¿Qué es un paradigma?
 
-La palabra “paradigma” proviene del griego pará \(junto\) y deigma \(modelo\), y significa algo así como “demostración de un modelo”.
+La palabra “paradigma” proviene del griego _pará_ \(junto\) y _deigma_ \(modelo\), y significa algo así como “demostración de un modelo”.
 
 Un paradigma es un esquema formal de organización, un marco teórico, un conjunto de teorías alrededor de un tema determinado.
 
@@ -102,17 +102,14 @@ Algunos de los lenguajes fuertemente tipados son: C++, C\#, Java, Python.
 
 Ejemplo \(en seudocódigo\):
 
-`a = 2`
-
-`b = "2"`
-
-`concatenar(a, b)      # Type Error`
-
-`sumar(a, b)           # Type Error`
-
-`concatenar(str(a), b) # Retorna "22"`
-
-`sumar(a, int(b))      # Retorna 4`
+```
+a = 2
+b = "2"
+concatenar(a, b)      # Type Error
+sumar(a, b)           # Type Error
+concatenar(str(a), b) # Retorna "22"
+sumar(a, int(b))      # Retorna 4
+```
 
 ### Weak typing
 
@@ -124,27 +121,26 @@ Algunos de los lenguajes débilmente tipados son: BASIC, JavaScript, Perl, PHP.
 
 Ejemplo \(en seudocódigo\):
 
-`a = 2`
-
-`b = "2"`
-
-`concatenar(a, b) # Retorna "22"`
-
-`sumar(a, b)      # Retorna 4`
+```
+a = 2
+b = "2"
+concatenar(a, b) # Retorna "22"
+sumar(a, b)      # Retorna 4
+```
 
 ### Static typing
 
-Se dice de un lenguaje de programación que usa un **tipado estático** cuando el chequeo de tipificación se realiza durante el tiempo de **compilación**, opuesto al de ejecución.
+Se dice que un lenguaje de programación usa un **tipado estático** cuando el chequeo de tipificación se realiza durante el tiempo de **compilación**, opuesto al de ejecución.
 
 Comparado con el tipado dinámico, el estático permite que los errores de programación sean detectados antes, y que la ejecución del programa sea más eficiente.
 
-Ejemplos de lenguajes que usan tipado estático son C, C++, Java y Haskell.
+Como ejemplos de lenguajes que usan tipado estático tenemos a C, C++, Java y Haskell.
 
 ### Dynamic typing
 
 Un lenguaje de programación tiene **tipado dinámico** si una misma variable puede tomar valores de distinto tipo en distintos momentos durante la ejecución.
 
-La separación entre tipado estático y dinámico se suele confundir con la diferencia entre lenguajes fuertemente tipados y lenguajes débilmente o no tipados.
+La separación entre tipado estático y dinámico se suele confundir con la diferencia entre lenguajes fuertemente tipados y lenguajes débilmente \(o no\) tipados.
 
 La mayoría de los lenguajes de tipado dinámico son lenguajes interpretados, como Python o Ruby.
 
@@ -152,7 +148,26 @@ La mayoría de los lenguajes de tipado dinámico son lenguajes interpretados, co
 
 En los lenguajes de programación orientados a objetos, se conoce como _duck typing_ o **tipado de pato** al estilo de tipificación dinámica de datos en que el conjunto actual de métodos y propiedades determina la validez semántica, en vez de que lo hagan la herencia de una clase en particular o la implementación de una interfaz específica.
 
+Dicho de una manera más simple, el tipado de pato, característica común en los lenguajes dinámicos, hace posible que no importe de qué tipo sea el dato que estoy manejando, sino lo que sea capaz de hacer con él.
+
 El nombre del concepto se refiere a la prueba del pato, una humorada de razonamiento inductivo atribuida a James Whitcomb Riley, que es como sigue: _“Cuando veo un ave que camina como un pato, nada como un pato y suena como un pato, a esa ave yo la llamo un pato.”_
 
-Python es un buen ejemplo de lenguaje de programación que implementa el _duck typing_.
+Python es un buen ejemplo de lenguaje de programación que implementa el _duck typing_. Por ejemplo, el operador de asignación de suma \(+=\) se puede usar con listas y cadenas de caracteres, además de números:
+
+```
+>>> a = 1
+>>> a += 1
+>>> a
+2
+>>> l = ["Hugo", "Paco"]
+>>> l += ["Luis"]
+>>> l
+['Hugo', 'Paco', 'Luis']
+>>> c = "Hola, "
+>>> c += "Mundo"
+>>> c
+'Hola, Mundo'
+```
+
+
 

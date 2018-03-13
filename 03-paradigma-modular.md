@@ -6,7 +6,7 @@ Un módulo es cada una de las partes de un programa que resuelve uno de los subp
 
 ## Entrada-Proceso-Salida
 
-Cada módulo puede o no aceptar valores de entrada y retornar valores de salida. El proceso interno puede o no estar relacionado con dichos valores. Los valores de entrada se denominan **parámetros**, **argumentos** o **atributos**.
+Cada módulo puede o no aceptar valores de entrada y retornar valores de salida. El proceso interno puede o no estar relacionado con dichos valores. Los valores de entrada se denominan indistintamente **parámetros**, **argumentos** o **atributos**.
 
 ## Divide y vencerás \(top-down\)
 
