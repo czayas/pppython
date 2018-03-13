@@ -10,7 +10,7 @@ Otra ventaja de Python la constituye su enorme biblioteca de módulos, distribui
 
 ## ¿Qué se necesita para programar en Python?
 
-Python está disponible para prácticamente todos los sistemas operativos, y suele venir incluido en la mayoría de las distribuciones Linux, por lo tanto es probable que muchos usuarios ya tengan en su equipo todo lo necesario para poder empezar a programar en este lenguaje. De no ser así, puede descargarse el instalador necesario en [https://www.python.org/downloads/](https://www.python.org/downloads/)
+Python está disponible para prácticamente todos los sistemas operativos, y suele venir incluido en la mayoría de las distribuciones Linux, por lo tanto es probable que muchos usuarios ya tengan en su equipo todo lo necesario para poder empezar a programar en este lenguaje. De no ser así, puede descargarse el instalador correspondiente desde [https://www.python.org/downloads/](https://www.python.org/downloads/)
 
 En nuestra asignatura, usaremos la versión 3 de Python, a pesar de que la versión 2 sigue siendo muy popular al momento de escribir ésto, pero las diferencias entre ambas versiones no son muy notables, hasta el punto de que es posible escribir programas que sean completamente compatibles con cualquier versión.
 
@@ -40,5 +40,5 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ```
 
-
+Hay una gran cantidad de editores e IDEs que soportan Python, y la mayoría de ellos incluyen en su interfaz un panel con Python en modo interactivo. Probablemente el más conocido de todos sea [PyCharm](https://www.jetbrains.com/pycharm/).
 

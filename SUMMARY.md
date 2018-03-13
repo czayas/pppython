@@ -9,4 +9,5 @@
 * [Paradigma Funcional](05-paradigma-funcional.md)
 * [Paradigma Lógico](06-paradigma-logico.md)
 * [El lenguaje Python](a1-python.md)
+* [Calidad del software](a2-calidad-del-software.md)
 
