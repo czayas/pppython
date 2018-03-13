@@ -20,25 +20,19 @@ Un **procedimiento** es básicamente una función que no retorna ningún valor. 
 
 Palabras reservadas de Python: `import, def, return, yield`
 
-`import random`
+```py
+import random
+def azar(limite):
+    return random.randint(1,limite)
+def genazar(limite):
+    yield random.randint(1,limite)
+def par(numero):
+    return numero % 2 == 0
+def pares(limite):
+    for numero in range(limite):
+        if numero % 2 == 0:
+            yield numero
+```
 
-`def azar(limite):`
 
-`return random.randint(1,limite)`
-
-`def genazar(limite):`
-
-`yield random.randint(1,limite)`
-
-`def par(numero):`
-
-`return numero % 2 == 0`
-
-`def pares(limite):`
-
-`for numero in range(limite):`
-
-`if numero % 2 == 0:`
-
-`yield numero`
 
