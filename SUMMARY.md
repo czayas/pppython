@@ -1,6 +1,6 @@
-# Índice
+# Summary
 
-* [Léame primero](README.md)
+* [Portada](README.md)
 * [Introducción](00-introduccion.md)
 * [Paradigmas de Programación](01-paradigmas-de-programacion.md)
 * [Paradigma Estructurado](02-paradigma-estructurado.md)
@@ -9,6 +9,4 @@
 * [Paradigma Funcional](05-paradigma-funcional.md)
 * [Paradigma Lógico](06-paradigma-logico.md)
 * [El lenguaje Python](a1-python.md)
-
-
 
