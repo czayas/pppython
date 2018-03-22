@@ -220,58 +220,48 @@ La programación orientada a objetos se basa en los siguientes conceptos fundame
 
 Consiste en colocar al mismo nivel de abstracción a todos los elementos \(estado y comportamiento\) que pueden considerarse pertenecientes a una misma entidad \(identidad\). Esto permite aumentar la cohesión de los componentes del sistema.
 
-class Persona\(object\):
+```py
+class Persona(object):
 
-```
-def \_\_init\_\_\(self, nombre\):
+    def __init__(self, nombre):
+        self.setNombre(nombre)
 
-    self.setNombre\(nombre\)
+    def getNombre(self):
+        return ' '.join(self.__nombre)
 
+    def setNombre(self, nombre):
+        self.__nombre = nombre.split()
 
-
-def getNombre\(self\):
-
-    return ' '.join\(self.\_\_nombre\)
-
-
-
-def setNombre\(self, nombre\):
-
-    self.\_\_nombre = nombre.split\(\)
-
-
-
-nombre = property\(getNombre, setNombre\)
+    nombre = property(getNombre, setNombre)
 ```
 
 Las propiedades pertenecen al espacio de nombres del objeto \(namespace\) y pueden estar ocultas, es decir, sólo accesibles para el objeto. En Python, esto último se logra superficialmente anteponiendo dos guiones bajos \( \_\_ \) al nombre de la propiedad.
 
-carlos = Persona\("Carlos Zayas"\)
-
-print carlos.nombre.upper\(\)
+```py
+carlos = Persona("Carlos Zayas")
+print(carlos.nombre.upper())
 
 carlos.nombre = 'Carlos A. Zayas G.'
-
-print carlos.nombre.upper\(\)
+print(carlos.nombre.upper())
+```
 
 Decimos que en Python se logra sólo superficialmente el ocultamiento de las propiedades porque, si bien no podemos invocar la propiedad nombre de manera tradicional, sí podemos hacerlo de la siguiente manera:
 
-print carlos.\_Persona\_\_nombre
+```py
+print(carlos._Persona__nombre)
+```
 
 ### Herencia
 
 Las clases se relacionan entre sí dentro de una jerarquía de clasificación que permite definir nuevas clases basadas en clases preexistentes, y así poder crear objetos especializados.
 
-class Empleado\(Persona\):
+```py
+class Empleado(Persona):
 
-```
-def \_\_init\_\_\(self, nombre, cargo\):
-
-    Persona.\_\_init\_\_\(self, nombre\)
-
-    self.cargo = cargo
-
-    print "%s es %s" % \(self.nombre, self.cargo\)
+    def __init__(self, nombre, cargo):
+        Persona.__init__(self, nombre)
+        self.cargo = cargo
+        print("{} es {}".format(self.nombre, self.cargo))
 ```
 
 La herencia es el mecanismo por excelencia de la programación orientada a objetos que permite lograr la reutilización de código. Mediante ella, podemos crear nuevas clases modificando clases ya existentes.
@@ -282,91 +272,85 @@ Cuando la herencia involucra a más de una clase, hay herencia múltiple. El ord
 
 #### Orden de Resolución de Métodos
 
-El Orden de Resolución de Métodos o MRO \(Method Resolution Order\) es la manera en que un lenguaje de programación decide dónde buscar un método \(o una propiedad\) en una clase que hereda estos elementos de varias clases superiores.
+El Orden de Resolución de Métodos o MRO \(_Method Resolution Order_\) es la manera en que un lenguaje de programación decide dónde buscar un método \(o una propiedad\) en una clase que hereda estos elementos de varias clases superiores.
 
 La importancia del MRO se hace patente en presencia de la herencia múltiple donde, ante dos elementos con la misma denominación en clases distintas, es necesario definir qué método o propiedad prevalecerá en una instanciación.
 
-En el caso de Python, la evolución del lenguaje dio como resultado dos algoritmos MRO distintos, uno simple para las clases de estilo antiguo y otro más sofisticado para las clases de estilo nuevo \(las que heredan de object\). Ambos algoritmos provienen de la teoría de grafos, y son los siguientes:
+![](/assets/herencia.png)
 
-DFS – Depth First Search \(Búsqueda en profundidad\): Recorre los nodos del grafo \(árbol\) de izquierda a derecha empezando de la raíz pero hasta el nodo más lejano. En el diagrama, empezando desde la clase D, el orden sería D, B, A, C.
+En el caso de Python, la evolución del lenguaje dio como resultado dos algoritmos MRO distintos, uno simple para las clases de estilo antiguo y otro más sofisticado para las clases de estilo nuevo \(las que heredan de `object`\). Ambos algoritmos provienen de la teoría de grafos, y son los siguientes:
 
-BFS – Breadth First Search \(Búsqueda en anchura\): Recorre los nodos del grafo efectuando barridos de izquierda a derecha. En el diagrama, empezando desde la clase D, el orden sería D, B, C, A.
+* **DFS – Depth First Search** \(Búsqueda en profundidad\): Recorre los nodos del grafo \(árbol\) de izquierda a derecha empezando de la raíz pero hasta el nodo más lejano. En el diagrama, empezando desde la clase D, el orden sería D, B, A, C.
+* **BFS – Breadth First Search** \(Búsqueda en anchura\): Recorre los nodos del grafo efectuando barridos de izquierda a derecha. En el diagrama, empezando desde la clase D, el orden sería D, B, C, A.
 
-\# Algoritmo: DFS - Depth First Search \(Busqueda en profundidad\)
+```py
+# Este ejemplo es para Python 2
 
-class A: x = 'a'
+# Algoritmo: DFS - Depth First Search (Busqueda en profundidad) 
+class A: x = 'a' 
+class B(A): pass 
+class C(A): x = 'c' 
+class D(B, C): pass 
+print 'Viejo estilo: D.x = "%s"' % D.x 
 
-class B\(A\): pass
-
-class C\(A\): x = 'c'
-
-class D\(B, C\): pass
-
-print 'Viejo estilo: D.x = "%s"' % D.x
-
-\# Algoritmo: BFS - Breadth First Search \(Busqueda en anchura\)
-
-class A\(object\): x = 'a'
-
-class B\(A\): pass
-
-class C\(A\): x = 'c'
-
-class D\(B, C\): pass
-
+# Algoritmo: BFS - Breadth First Search (Busqueda en anchura) 
+class A(object): x = 'a' 
+class B(A): pass 
+class C(A): x = 'c' 
+class D(B, C): pass 
 print 'Nuevo estilo: D.x = "%s"' % D.x
+```
 
+```
 Viejo estilo: D.x = "a"
-
 Nuevo estilo: D.x = "c"
+```
 
-El MRO puede obtenerse mediante mecanismos de introspección, como puede verse en la siguiente secuencia de sentencias ejecutadas durante una sesión con el intérprete interactivo de Python:
+El MRO puede obtenerse mediante mecanismos de **introspección**, como puede verse en la siguiente secuencia de sentencias ejecutadas durante una sesión con el intérprete interactivo de Python.
 
 Empecemos creando dos clases vacías, únicamente a modo de ejemplo, haciendo uso de la sentencia comodín pass:
 
-&gt;&gt;&gt; class animal\(object\): pass
-
+```
+>>> class animal(object): pass 
+... 
+>>> class perro(animal): pass 
 ...
+```
 
-&gt;&gt;&gt; class perro\(animal\): pass
-
-...
-
-Acabamos de definir dos clases: animal \(de tipo object\) y perro, que hereda los métodos y propiedades de animal. Ambas clases aparentemente son iguales, a ninguna de las dos se les definieron métodos o propiedades específicas, pero se diferencian en cuanto a la herencia – una deriva de la otra.
+Acabamos de definir dos clases: `animal` \(de tipo `object`\) y `perro`, que hereda los métodos y propiedades de animal. Ambas clases aparentemente son iguales, a ninguna de las dos se les definieron métodos o propiedades específicas, pero se diferencian en cuanto a la herencia – una deriva de la otra.
 
 A continuación, creamos una instancia de la clase perro, a la que llamamos fido.
 
-&gt;&gt;&gt; fido = perro\(\)
+```
+>>> fido = perro()
+```
 
-Mediante el método \_\_class\_\_ y el operador is podemos ver que la clase del objeto fido es perro, no animal, aunque “desciende” de ella.
+Mediante el método `__class__` y el operador `is` podemos ver que la clase del objeto `fido` es `perro`, no `animal`, aunque “desciende” de ella.
 
-&gt;&gt;&gt; fido.\_\_class\_\_ is animal
-
-False
-
-&gt;&gt;&gt; fido.\_\_class\_\_ is perro
-
+```
+>>> fido.__class__ is animal 
+False 
+>>> fido.__class__ is perro 
 True
+```
 
-Sin embargo, con la función isinstance, vemos que fido es una instancia de la clase animal, al igual que de la sub-clase perro.
+Sin embargo, con la función `isinstance`, vemos que `fido` es una instancia de la clase `animal`, al igual que de la sub-clase `perro`.
 
-&gt;&gt;&gt; isinstance\(fido, animal\)
-
+```
+>>> isinstance(fido, animal) 
+True 
+>>> isinstance(fido, perro) 
 True
+```
 
-&gt;&gt;&gt; isinstance\(fido, perro\)
+Por último, el método `__mro__` nos devuelve una **tupla** en la que podemos ver el orden de resolución de métodos:
 
-True
-
-Por último, el método \_\_mro\_\_ nos devuelve una tupla en la que podemos ver el orden de resolución de métodos:
-
-&gt;&gt;&gt; animal.\_\_mro\_\_
-
-\(&lt;class '\_\_main\_\_.animal'&gt;, &lt;type 'object'&gt;\)
-
-&gt;&gt;&gt; perro.\_\_mro\_\_
-
-\(&lt;class '\_\_main\_\_.perro'&gt;, &lt;class '\_\_main\_\_.animal'&gt;, &lt;type 'object'&gt;\)
+```
+>>> animal.__mro__ 
+(<class '__main__.animal'>, <type 'object'>) 
+>>> perro.__mro__ 
+(<class '__main__.perro'>, <class '__main__.animal'>, <type 'object'>)
+```
 
 Los métodos y propiedades de una clase se superpondrán a los de la clase superior en el orden que aparecen en la tupla.
 
@@ -374,101 +358,112 @@ Los métodos y propiedades de una clase se superpondrán a los de la clase super
 
 Consiste en definir comportamientos diferentes basados en una misma denominación, pero asociados a objetos distintos entre sí. Al llamarlos por ese nombre común, se utilizará el adecuado al objeto que se esté invocando.
 
-a = Persona\("Pablo"\)              \# Nace Pablo
-
-b = Persona\("Juan"\)               \# Nace Juan
-
-print b                           \# Juan dice "Hola"
-
-c = Empleado\("Esteban","Chofer"\)  \# Nace Esteban
-
-```
-                              \# Esteban es Chofer
+```py
+a = Persona("Pablo")              # Nace Pablo 
+b = Persona("Juan")               # Nace Juan 
+print(b)                          # Juan dice "Hola" 
+c = Empleado("Esteban","Chofer")  # Nace Esteban 
+                                  # Esteban es Chofer
 ```
 
 En el siguiente ejemplo, las dos clases derivadas de Animal comparten el método sonido, pero cada una le agrega su particularidad.
 
+```py
 class Animal:
 
+    cantidad = 0
+
+    def __init__(self):
+        print("Hola, soy un animal.")
+        self.nombre = ""
+        Animal.cantidad += 1
+        print("Hay", Animal.cantidad, "animales.")
+
+    def sonido(self):
+        print("Este es mi sonido:")
+
+    def __del__(self):
+        print(self.nombre, "dice: Adios!")
+
+class Perro(Animal):
+
+    def __init__(self, nombre):
+        Animal.__init__(self)
+        print("Soy un perro.")
+        self.nombre = nombre
+        print("Me llamo", self.nombre)
+
+    def sonido(self):
+        Animal.sonido(self)
+        print("Guau!")
+
+class Gato(Animal):
+
+    def __init__(self, nombre):
+        Animal.__init__(self)
+        print("Soy un gato.")
+        self.nombre = nombre
+        print("Me llamo", self.nombre)
+
+    def sonido(self):
+        Animal.sonido(self)
+        print("Miau!")
+
+fido = Perro("Fido")
+fido.sonido()
+tom = Gato("Tom")
+tom.sonido()
 ```
-cantidad = 0
-
-
-
-def \_\_init\_\_\(self\):
-
-    print "Hola, soy un animal."
-
-    self.nombre = ""
-
-    Animal.cantidad += 1
-
-    print "Hay", Animal.cantidad, "animales."
-
-
-
-def sonido\(self\):
-
-    print "Este es mi sonido:"
-
-
-
-def \_\_del\_\_\(self\):
-
-    print self.nombre, "dice: Adios!"
-```
-
-class Perro\(Animal\):
-
-```
-def \_\_init\_\_\(self, nombre\):
-
-    Animal.\_\_init\_\_\(self\)
-
-    print "Soy un perro."
-
-    self.nombre = nombre
-
-    print "Me llamo", self.nombre
-
-
-
-def sonido\(self\):
-
-    Animal.sonido\(self\)
-
-    print "Guau!"
-```
-
-class Gato\(Animal\):
-
-```
-def \_\_init\_\_\(self, nombre\):
-
-    Animal.\_\_init\_\_\(self\)
-
-    print "Soy un gato."
-
-    self.nombre = nombre
-
-    print "Me llamo", self.nombre
-
-
-
-def sonido\(self\):
-
-    Animal.sonido\(self\)
-
-    print "Miau!"
-```
-
-fido = Perro\("Fido"\)
-
-fido.sonido\(\)
-
-tom = Gato\("Tom"\)
-
-tom.sonido\(\)
 
 Los objetos fido y tom descienden de Animal pero cada uno “emite su propio sonido”.
+
+Una subclase suele necesitar llamar al constructor de la superclase:
+
+```py
+class Subclase(Superclase):
+    def __init__(self):
+        # Aquí la subclase hace sus cosas
+        Superclase.__init__(self)
+        # Aquí la subclase sigue haciendo sus cosas
+```
+
+Para no tener que nombrar a la superclase, puede usarse la función `super`:
+
+```py
+super(Subclase, self).__init__()
+```
+
+En Python 3, es posible ahorrarse un poco de código escribiendo simplemente:
+
+```py
+super().__init__()
+```
+
+Ejemplo en ambas versiones:
+
+```py
+# Python 2.x
+
+class A(object):
+ def __init__(self):
+   print "Mundo"
+
+class B(A):
+ def __init__(self):
+   print "Hola"
+   super(B, self).__init__()
+
+# Python 3.x
+
+class A:
+ def __init__(self):
+   print("Mundo")
+
+class B(A):
+ def __init__(self):
+   print("Hola")
+   super().__init__()
+```
+
+
 
