@@ -42,3 +42,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 Hay una gran cantidad de editores e IDEs que soportan Python, y la mayoría de ellos incluyen en su interfaz un panel con Python en modo interactivo. Probablemente el más conocido de todos sea [PyCharm](https://www.jetbrains.com/pycharm/).
 
+## Persistencia de datos
+
+.
+
